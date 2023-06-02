@@ -1,8 +1,6 @@
-#                  ▄▄  ▄  ▄
-#                  █▄█ █▙▟█
-#                  █▄█ █  █
+
 #              © Copyright 2023
-#           https://t.me/BlackModules
+#           https://t.me/Re_Modules
 #
 #        Licensed under the GNU AGPLv3
 #   https://www.gnu.org/licenses/agpl-3.0.html
