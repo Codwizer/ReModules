@@ -23,23 +23,25 @@ def register(cb):
 class VirusTotalMod(loader.Module):
     strings = {
     "name": "VirusTotal",
-    "no_file": "You have not selected a file",
-    "download": "Downloading...",
-    "skan": "Scanning...",
+    "no_file": "<emoji document_id=5210952531676504517>🚫</emoji> <b>You have not selected a file </b>",
+    "download": "<emoji document_id=5334677912270415274>😑</emoji> <b>Downloading... </b>",
+    "skan": "<emoji document_id=5325792861885570739>🫥</emoji> <b>Scanning...</b>",
     "link": "🦠 Link to VirusTotal",
     "no_virus": "✅ The file is clean",
     "error": "Scan error.",
-    "no_format": "This format is not supported."
+    "no_format": "<b>This format is not supported. </b>",
+    "no_apikey": "<emoji document_id=5260342697075416641>🚫</emoji> You didn't specify the Api Key"
     }
     
     strings_ru = {
-    "no_file": "Вы не выбрали файл.",
-    "download": "Скачивание...",
-    "skan": "Сканирую...",
+    "no_file": "<emoji document_id=5210952531676504517>🚫</emoji> </b>Вы не выбрали файл.</b>",
+    "download": "<emoji document_id=5334677912270415274>😑</emoji> </b>Скачивание...</b>",
+    "skan": "<emoji document_id=5325792861885570739>🫥</emoji>  <b>Сканирую...</b>",
     "link": "🦠 Ссылка на VirusTotal",
     "no_virus": "✅ Файл чист.",
     "error": "Ошибка сканирования.",
-    "no_format": "Этот формат не поддерживается."
+    "no_format": "Этот формат не поддерживается.",
+    "no_apikey": "<emoji document_id=5260342697075416641>🚫</emoji> Вы не указали Api Key"
     }
 
 
@@ -48,8 +50,9 @@ class VirusTotalMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
             "token-vt",
-            "No token",
-            "Need a token with www.virustotal.com/gui/my-apikey",
+            None,
+            lambda: "Need a token with www.virustotal.com/gui/my-apikey",
+            validator=loader.validators.Hidden()
             )
          )
 
@@ -61,6 +64,9 @@ class VirusTotalMod(loader.Module):
             await utils.answer(message, self.strings("no_file"))
             return
         else:
+            if self.config["token-vt"] is None:
+                await utils.answer(message, self.strings("no_apikey"))
+                return
             for i in os.listdir():
                 if "file" in i:
                     os.system(f"rm -rf {i}")
