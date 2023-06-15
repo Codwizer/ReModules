@@ -1,7 +1,7 @@
 # ReModules
 
 
-**More info in telegram channel ```-->``` [Chanel](https://t.me/re_modules)**
+**More info in telegram channel ```-->``` [Channel](https://t.me/re_modules)**
  
 ## Install
  
