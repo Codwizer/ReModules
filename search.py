@@ -1,13 +1,13 @@
 # ---------------------------------------------------------------------------------
 # Name: Search
 # Description: Search for your question on the Internet 
-# Author: @re_modules
+# Author: @hikka_mods
 # ---------------------------------------------------------------------------------
 
 # 🔒    Licensed under the GNU AGPLv3
 # 🌐 https://www.gnu.org/licenses/agpl-3.0.html
 
-# meta developer: @re_modules
+# meta developer: @hikka_mods
 # scope: Api Search
 # scope: Api Search 0.0.1
 # ---------------------------------------------------------------------------------
