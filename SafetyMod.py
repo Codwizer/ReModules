@@ -35,7 +35,7 @@ def generate_password(length, letters=True, numbers=True, symbols=True):
     return password
 
 class SafetyMod(loader.Module):
-   """generate random password"""
+    """generate random password"""
     strings = {
         "name": "Safety",
         "pass": "<emoji document_id=5472287483318245416>*⃣</emoji> <b>Here is your secure password:</b> <code>{}</code>"
