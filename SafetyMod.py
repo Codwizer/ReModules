@@ -39,11 +39,10 @@ class SafetyMod(loader.Module):
     strings = {
         "name": "Safety",
         "pass": "<emoji document_id=5472287483318245416>*⃣</emoji> <b>Here is your secure password:</b> <code>{}</code>"
-
-    }
+              }
     strings_ru = {
          "pass": "re_modules <emoji document_id=5472287483318245416>*⃣</emoji> <b>Вот ваш безопасный пароль:</b> <code>{}</code>"
-    }
+                }
 
     async def passwordcmd(self, message):
         """random password\n-n - numbers\n-s - symbols \n -l - letters"""
