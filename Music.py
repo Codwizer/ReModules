@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------------
 # Name: Music
 # Description: Search for music through music bots.
-# Author: @re_modules
+# Author: @hikka_mods
 # Commands:
 # ym / vkm
 # ---------------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 # 🔒    Licensed under the GNU AGPLv3
 # 🌐 https://www.gnu.org/licenses/agpl-3.0.html
 
-# meta developer: @re_modules
+# meta developer: @hikka_mods
 # scope: Music
 # scope: Music 0.0.1
 # ---------------------------------------------------------------------------------
