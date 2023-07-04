@@ -3,3 +3,4 @@ Music
 search
 animals
 SafetyMod
+TelegramStatusCodes
