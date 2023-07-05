@@ -4,3 +4,4 @@ search
 animals
 SafetyMod
 TelegramStatusCodes
+Text in sticker
