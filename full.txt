@@ -6,3 +6,4 @@ SafetyMod
 TelegramStatusCodes
 Text in sticker
 jacques
+CheckSpamBan
