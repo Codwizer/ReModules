@@ -7,3 +7,4 @@ TelegramStatusCodes
 Text in sticker
 jacques
 CheckSpamBan
+InlineCoin
