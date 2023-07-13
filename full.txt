@@ -8,3 +8,4 @@ Text in sticker
 jacques
 CheckSpamBan
 InlineCoin
+Memes
