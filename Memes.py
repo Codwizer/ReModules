@@ -44,7 +44,7 @@ class MemesMod(loader.Module):
               "dell": "❌ Закрыть",
     }
 
-    async def memscmd(self, message: Message):
+    async def memescmd(self, message: Message):
         random_site = random.randint(1, 2857)
         url = f"https://www.memify.ru/memes/{random_site}"
         async with aiohttp.ClientSession() as session:
