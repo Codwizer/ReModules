@@ -9,3 +9,4 @@ jacques
 CheckSpamBan
 InlineCoin
 Memes
+AutofarmCookies
