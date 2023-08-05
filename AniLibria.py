@@ -73,7 +73,9 @@ class AniLibriaMod(loader.Module):
             ]
             for torrent in anime_title.torrents.list
         )
+        kb.append([{"text": "🔃 Обновить", "callback": self.inline__update}])
         kb.append([{"text": "🚫 Закрыть", "callback": self.inline__close}])
+
         await self.inline.form(
             text=text,
             photo=self.link + anime_title.posters.original.url,
@@ -119,3 +121,43 @@ class AniLibriaMod(loader.Module):
 
     async def inline__close(self, call: CallbackQuery) -> None:
         await call.delete()
+
+
+    async def inline__update(self, call: CallbackQuery) -> None:
+        anime_title = await ani_client.get_random_title()
+
+        text = f"{anime_title.names.ru} \n"
+        text += f"{self.strings['status']} {anime_title.status.string}\n\n"
+        text += f"{self.strings['type']} {anime_title.type.full_string}\n"
+        text += f"{self.strings['season']} {anime_title.season.string}\n"
+        text += f"{self.strings['genres']} {' '.join(anime_title.genres)}\n\n"
+
+        text += f"<code>{anime_title.description}</code>\n\n"
+        text += f"{self.strings['favorite']} {anime_title.in_favorites}"
+
+        kb = [
+            [
+                {
+                    "text": "Ссылка",
+                    "url": f"https://anilibria.tv/release/{anime_title.code}.html",
+                }
+            ]
+        ]
+
+        kb.extend(
+            [
+                {
+                    "text": f"{torrent.quality.string}",
+                    "url": f"https://anilibria.tv/{torrent.url}",
+                }
+            ]
+            for torrent in anime_title.torrents.list
+        )
+        kb.append([{"text": "🔃 Обновить", "callback": self.inline__update}])
+        kb.append([{"text": "🚫 Закрыть", "callback": self.inline__close}])
+
+        await call.edit(
+            text=text,
+            photo=self.link + anime_title.posters.original.url,
+            reply_markup=kb,
+        )
