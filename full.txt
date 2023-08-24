@@ -11,3 +11,4 @@ InlineCoin
 Memes
 AutofarmCookies
 AniLibria
+PastebinAPI
