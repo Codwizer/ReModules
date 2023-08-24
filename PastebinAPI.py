@@ -43,7 +43,7 @@ class PastebinAPIMod(loader.Module):
          )
 
     async def pastcmd(self, message):
-        """fills in the code on pastebin"""
+        """Заливает код в Pastebin"""
         text = utils.get_args(message)
 
         if self.config["pastebin"] is None:
