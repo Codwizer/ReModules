@@ -26,9 +26,6 @@ from .. import loader, utils
 
 logger = logging.getLogger(__name__)
 
-def register(cb):
-    cb(TextinstickerMod())
-
 @loader.tds
 class TextinstickerMod(loader.Module):
     """Text to sticker"""
