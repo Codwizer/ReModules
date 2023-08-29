@@ -4,7 +4,7 @@ search
 animals
 SafetyMod
 TelegramStatusCodes
-Text in sticker
+Text_Sticker
 jacques
 CheckSpamBan
 InlineCoin
