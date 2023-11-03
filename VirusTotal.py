@@ -1,13 +1,13 @@
-# --------------------------------------------------------------------------------- 
-# Name: VirusTotal 
-# Description: Checks files for viruses using VirusTotal 
-# Author: @hikka_mods 
-# --------------------------------------------------------------------------------- 
-# 🔒    Licensed under the GNU AGPLv3 
-# 🌐 https://www.gnu.org/licenses/agpl-3.0.html 
+# ---------------------------------------------------------------------------------
+# Name: VirusTotal
+# Description: Checks files for viruses using VirusTotal
+# Author: @hikka_mods
+# ---------------------------------------------------------------------------------
+# 🔒    Licensed under the GNU AGPLv3
+# 🌐 https://www.gnu.org/licenses/agpl-3.0.html
 
-# meta developer: @hikka_mods 
-# scope: Api VirusTotal 
+# meta developer: @hikka_mods
+# scope: Api VirusTotal
 # scope: Api VirusTotal 0.0.1
 # requires: json, aiohttp, tempfile
 # ---------------------------------------------------------------------------------
@@ -18,6 +18,7 @@ from .. import loader, utils
 from hikkatl.tl.types import Message
 
 logger = logging.getLogger(__name__)
+
 
 class VirusTotalMod(loader.Module):
     strings = {
@@ -80,50 +81,52 @@ class VirusTotalMod(loader.Module):
                         with open(file_path, "rb") as file:
                             files = {"file": (file_name, file)}
                             data = aiohttp.FormData()
-                            data.add_field('file', file, filename=file_name)
+                            data.add_field("file", file, filename=file_name)
                             async with session.post(
                                 "https://www.virustotal.com/vtapi/v2/file/scan",
                                 data=data,
-                                params=params
+                                params=params,
                             ) as response:
-                               if response.status == 200:
-                                false = []
-                                result = await response.json()
-                                res = (
-                                    (json.dumps(result, sort_keys=False, indent=4))
-                                    .split()[10]
-                                    .split('"')[1]
-                                )
-                                params = {"apikey": token, "resource": res}
-                                async with session.get(
-                                    "https://www.virustotal.com/vtapi/v2/file/report",
-                                    params=params,
-                                ) as response:
-                                   if response.status == 200:
+                                if response.status == 200:
+                                    false = []
                                     result = await response.json()
-                                    for key in result["scans"]:
-                                        if result["scans"][key]["detected"]:
-                                            false.append(
-                                                f"⛔️ <b>{key}</b>\n ╰ <code>{result['scans'][key]['result']}</code>"
+                                    res = (
+                                        (json.dumps(result, sort_keys=False, indent=4))
+                                        .split()[10]
+                                        .split('"')[1]
+                                    )
+                                    params = {"apikey": token, "resource": res}
+                                    async with session.get(
+                                        "https://www.virustotal.com/vtapi/v2/file/report",
+                                        params=params,
+                                    ) as response:
+                                        if response.status == 200:
+                                            result = await response.json()
+                                            for key in result["scans"]:
+                                                if result["scans"][key]["detected"]:
+                                                    false.append(
+                                                        f"⛔️ <b>{key}</b>\n ╰ <code>{result['scans'][key]['result']}</code>"
+                                                    )
+                                            out = (
+                                                "\n".join(false)
+                                                if len(false) > 0
+                                                else self.strings("no_virus")
                                             )
-                                    out = (
-                                        "\n".join(false)
-                                        if len(false) > 0
-                                        else self.strings("no_virus")
-                                    )
-                                    uyrl = f"https://www.virustotal.com/gui/file/{result['resource']}/detection"
-                                    await self.inline.form(
-                                        text=f"Detections: {len(false)} / {len(result['scans'])}\n\n{out}\n\n",
-                                        message=message,
-                                        reply_markup={
-                                            "text": self.strings("link"),
-                                            "url": uyrl,
-                                        },
-                                    )
-                                   else:
+                                            uyrl = f"https://www.virustotal.com/gui/file/{result['resource']}/detection"
+                                            await self.inline.form(
+                                                text=f"Detections: {len(false)} / {len(result['scans'])}\n\n{out}\n\n",
+                                                message=message,
+                                                reply_markup={
+                                                    "text": self.strings("link"),
+                                                    "url": uyrl,
+                                                },
+                                            )
+                                        else:
+                                            await utils.answer(
+                                                message, self.strings("error")
+                                            )
+                                else:
                                     await utils.answer(message, self.strings("error"))
-                               else:
-                                await utils.answer(message, self.strings("error"))
                     except Exception as e:
                         await utils.answer(
                             message,

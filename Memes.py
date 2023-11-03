@@ -27,6 +27,7 @@ from telethon.tl.types import Message
 
 from .. import loader, utils
 
+
 async def get_random_image():
     random_site = random.randint(1, 3389)
     url = f"https://www.memify.ru/memes/{random_site}"
@@ -42,15 +43,16 @@ async def get_random_image():
 
     return img
 
+
 @loader.tds
 class MemesMod(loader.Module):
     """Random memes"""
 
     strings = {
-              "name": "Memes",
-              "done": "☄️ Лови мем",
-              "still": "🔄 Обновить",
-              "dell": "❌ Закрыть",
+        "name": "Memes",
+        "done": "☄️ Лови мем",
+        "still": "🔄 Обновить",
+        "dell": "❌ Закрыть",
     }
 
     async def memescmd(self, message: Message):
@@ -60,14 +62,18 @@ class MemesMod(loader.Module):
             photo=img,
             message=message,
             reply_markup=[
-                    [{
+                [
+                    {
                         "text": self.strings("still"),
                         "callback": self.ladno,
-                    }],
-                    [{
+                    }
+                ],
+                [
+                    {
                         "text": self.strings("dell"),
                         "callback": self.dell,
-                    }]
+                    }
+                ],
             ],
             silent=True,
         )
@@ -78,14 +84,18 @@ class MemesMod(loader.Module):
             text=self.strings("done"),
             photo=img,
             reply_markup=[
-                    [{
+                [
+                    {
                         "text": self.strings("still"),
                         "callback": self.ladno,
-                    }],
-                    [{
+                    }
+                ],
+                [
+                    {
                         "text": self.strings("dell"),
                         "callback": self.dell,
-                    }]
+                    }
+                ],
             ],
         )
 

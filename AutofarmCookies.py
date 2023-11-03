@@ -110,7 +110,9 @@ class AutofarmCookiesMod(loader.Module):
                     self.cookies, id=[x.id for x in sch]
                 )
             )
-            return await self.client.send_message(self.cookies, "/cookie", schedule=delta)
+            return await self.client.send_message(
+                self.cookies, "/cookie", schedule=delta
+            )
         if "✨" in event.raw_text:
             args = event.raw_text.split()
             for x in args:
@@ -160,11 +162,10 @@ class AutofarmCookiesMod(loader.Module):
     @loader.command()
     async def ckiescmd(self, message):
         """Помощь по модулю AutofarmCookies"""
-        chelp = ("""
+        chelp = """
 🍀| <b>Помощь по командам:</b>
 .cookon - Включает авто фарм.
 .cookoff - Выключает авто фарм.
 .farm - Показывает сколько вы нафармили.
 .me - Показывает ваш ммешок"""
-        )
         await utils.answer(message, chelp)

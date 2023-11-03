@@ -1,6 +1,6 @@
 # ---------------------------------------------------------------------------------
 # Name: Search
-# Description: Search for your question on the Internet 
+# Description: Search for your question on the Internet
 # Author: @hikka_mods
 # ---------------------------------------------------------------------------------
 
@@ -21,13 +21,12 @@ from ..inline.types import InlineCall, InlineQuery
 
 @loader.tds
 class Search(loader.Module):
-
     strings = {
         "name": "Search",
         "search": "<emoji document_id=5188311512791393083>🌎</emoji><b> Я поискал информацию за тебя</b> ",
         "isearch": "🔎<b> Я поискал информацию за тебя</b> ",
         "link": "🗂️ Ссылка на ваш запрос",
-        "close": "❌ Закрыть"
+        "close": "❌ Закрыть",
     }
 
     async def googlecmd(self, message: Message):
@@ -35,35 +34,45 @@ class Search(loader.Module):
         args = utils.get_args_raw(message)
         g = utils.get_args_raw(message)
         google = f"https://google.com/search?q={g}"
-        await utils.answer(message, self.strings("search") + f'<a href="{google}">Ссылка</a>')
- 
+        await utils.answer(
+            message, self.strings("search") + f'<a href="{google}">Ссылка</a>'
+        )
+
     async def yandexcmd(self, message: Message):
         """поискать в Yandex"""
         args = utils.get_args_raw(message)
         y = utils.get_args_raw(message)
         yandex = f"https://yandex.ru/?q={y}"
-        await utils.answer(message, self.strings("search") + f'<a href="{yandex}">Ссылка</a>')
- 
+        await utils.answer(
+            message, self.strings("search") + f'<a href="{yandex}">Ссылка</a>'
+        )
+
     async def duckduckgocmd(self, message: Message):
         """поискать в Duckduckgo"""
         args = utils.get_args_raw(message)
         d = utils.get_args_raw(message)
         duckduckgo = f"https://duckduckgo.com/?q={d}"
-        await utils.answer(message, self.strings("search") + f'<a href="{duckduckgo}">Ссылка</a>')
- 
+        await utils.answer(
+            message, self.strings("search") + f'<a href="{duckduckgo}">Ссылка</a>'
+        )
+
     async def bingcmd(self, message: Message):
         """поискать в Bing"""
         args = utils.get_args_raw(message)
         b = utils.get_args_raw(message)
         bing = f"https://bing.com/?q={b}"
-        await utils.answer(message, self.strings("search") + f'<a href="{bing}">Ссылка</a>')
- 
+        await utils.answer(
+            message, self.strings("search") + f'<a href="{bing}">Ссылка</a>'
+        )
+
     async def youcmd(self, message: Message):
         """поискать в You"""
         args = utils.get_args_raw(message)
         y = utils.get_args_raw(message)
         you = f"https://you.com/?q={y}"
-        await utils.answer(message, self.strings("search") + f'<a href="{you}">Ссылка</a>')
+        await utils.answer(
+            message, self.strings("search") + f'<a href="{you}">Ссылка</a>'
+        )
 
     async def igooglecmd(self, message: Message):
         """поискать в Google инлайн"""
@@ -73,14 +82,13 @@ class Search(loader.Module):
             text=self.strings("isearch"),
             message=message,
             reply_markup=[
-                    [{
+                [
+                    {
                         "text": self.strings("link"),
                         "url": google,
-                    }],
-                    [{
-                        "text": self.strings("close"),
-                        "action": "close"
-                    }]
+                    }
+                ],
+                [{"text": self.strings("close"), "action": "close"}],
             ],
             silent=True,
         )
@@ -93,16 +101,15 @@ class Search(loader.Module):
             text=self.strings("isearch"),
             message=message,
             reply_markup=[
-                    [{
+                [
+                    {
                         "text": self.strings("link"),
                         "url": yandex,
-                    }],
-                    [{
-                        "text": self.strings("close"),
-                        "action": "close"
-                    }]
+                    }
+                ],
+                [{"text": self.strings("close"), "action": "close"}],
             ],
-            silent=True
+            silent=True,
         )
 
     async def iduckduckgocmd(self, message: Message):
@@ -113,18 +120,16 @@ class Search(loader.Module):
             text=self.strings("isearch"),
             message=message,
             reply_markup=[
-                    [{
+                [
+                    {
                         "text": self.strings("link"),
                         "url": duckduckgo,
-                    }],
-                    [{
-                        "text": self.strings("close"),
-                         "action": "close"
-                    }]
+                    }
+                ],
+                [{"text": self.strings("close"), "action": "close"}],
             ],
             silent=True,
         )
- 
 
     async def ibingcmd(self, message: Message):
         """поискать в Bing инлайн"""
@@ -134,14 +139,13 @@ class Search(loader.Module):
             text=self.strings("isearch"),
             message=message,
             reply_markup=[
-                    [{
+                [
+                    {
                         "text": self.strings("link"),
                         "url": bing,
-                    }],
-                    [{
-                        "text": self.strings("close"),
-                         "action": "close"
-                    }]
+                    }
+                ],
+                [{"text": self.strings("close"), "action": "close"}],
             ],
             silent=True,
         )
@@ -154,18 +158,16 @@ class Search(loader.Module):
             text=self.strings("isearch"),
             message=message,
             reply_markup=[
-                    [{
+                [
+                    {
                         "text": self.strings("link"),
                         "url": you,
-                    }],
-                    [{
-                        "text": self.strings("close"),
-                         "action": "close"
-                    }]
+                    }
+                ],
+                [{"text": self.strings("close"), "action": "close"}],
             ],
             silent=True,
         )
-
 
     async def close(self, call):
         """Callback button"""

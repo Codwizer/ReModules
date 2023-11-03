@@ -23,6 +23,7 @@ import datetime
 logger = logging.getLogger(__name__)
 ani_client = AniLibriaClient()
 
+
 @loader.tds
 class AniLibriaMod(loader.Module):
     """Searches and gives random agtme on the AniLibria database."""
@@ -107,21 +108,20 @@ class AniLibriaMod(loader.Module):
             title_text += f"{self.strings['favorite']} {anime_title.in_favorites}"
 
             inline_query.append(
-            InlineQueryResultPhoto(
-                id=str(anime_title.code),
-                title=anime_title.names.ru,
-                description=anime_title.type.full_string,
-                caption=title_text,
-                thumb_url=self.link + anime_title.posters.small.url,
-                photo_url=self.link + anime_title.posters.original.url,
-                parse_mode="html",
+                InlineQueryResultPhoto(
+                    id=str(anime_title.code),
+                    title=anime_title.names.ru,
+                    description=anime_title.type.full_string,
+                    caption=title_text,
+                    thumb_url=self.link + anime_title.posters.small.url,
+                    photo_url=self.link + anime_title.posters.original.url,
+                    parse_mode="html",
+                )
             )
-        )
         await query.answer(inline_query, cache_time=0)
 
     async def inline__close(self, call: CallbackQuery) -> None:
         await call.delete()
-
 
     async def inline__update(self, call: CallbackQuery) -> None:
         anime_title = await ani_client.get_random_title()
