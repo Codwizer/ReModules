@@ -51,7 +51,7 @@ class DaysToMyBirthday(loader.Module):
 
     async def checker(self):
         while True:
-            if self.db.get(__name__, 'change_name') == False:
+            if self.db.get(__name__, 'change_name') is False:
                 return
             now = datetime.now()
             brth = (f"{self.config['birthday_date']}")
@@ -78,7 +78,7 @@ class DaysToMyBirthday(loader.Module):
         '''- выставить таймер дней в ник (нестабильно)'''
         user = await self.client(GetFullUserRequest(self.client.hikka_me.id))
         name = user.users[0].last_name
-        if name == None:
+        if name is None:
             name = ' '
         self.db.set(__name__, 'last_name', name)
         if self.db.get(__name__, 'change_name'):
@@ -103,7 +103,7 @@ class DaysToMyBirthday(loader.Module):
     async def bt(self, message):
         """- вывести таймер"""
 
-        if self.config['birthday_date'] == None:
+        if self.config['birthday_date'] is None:
             await utils.answer(message, self.strings('date_error'))
             msg = await self.client.send_message(message.chat_id, '<i>Открываю конфиг...</i>')
             await self.allmodules.commands["config"](
