@@ -16,11 +16,12 @@ from telethon.tl.types import Message
 
 from .. import loader, utils
 
+
 def generate_password(length, letters=True, numbers=True, symbols=True):
     """Function to generate random password"""
-    LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-    NUMBERS = '0123456789'
-    SYMBOLS = '!#$%&*+-=?@^_'
+    LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    NUMBERS = "0123456789"
+    SYMBOLS = "!#$%&*+-=?@^_"
     charsets = []
     if letters:
         charsets.append(LETTERS)
@@ -29,20 +30,22 @@ def generate_password(length, letters=True, numbers=True, symbols=True):
     if symbols:
         charsets.append(SYMBOLS)
     if not charsets:
-        raise ValueError('At least one of letters, numbers, or symbols must be True')
-    charset = ''.join(charsets)
-    password = ''.join(random.choice(charset) for i in range(length))
+        raise ValueError("At least one of letters, numbers, or symbols must be True")
+    charset = "".join(charsets)
+    password = "".join(random.choice(charset) for i in range(length))
     return password
+
 
 class SafetyMod(loader.Module):
     """generate random password"""
+
     strings = {
         "name": "Safety",
-        "pass": "<emoji document_id=5472287483318245416>*⃣</emoji> <b>Here is your secure password:</b> <code>{}</code>"
-              }
+        "pass": "<emoji document_id=5472287483318245416>*⃣</emoji> <b>Here is your secure password:</b> <code>{}</code>",
+    }
     strings_ru = {
-         "pass": "re_modules <emoji document_id=5472287483318245416>*⃣</emoji> <b>Вот ваш безопасный пароль:</b> <code>{}</code>"
-                }
+        "pass": "re_modules <emoji document_id=5472287483318245416>*⃣</emoji> <b>Вот ваш безопасный пароль:</b> <code>{}</code>"
+    }
 
     async def passwordcmd(self, message):
         """random password\n-n - numbers\n-s - symbols \n -l - letters"""
@@ -52,13 +55,15 @@ class SafetyMod(loader.Module):
         numbers = False
         symbols = False
         for i in text:
-            if i.startswith('password'):
-                length = int(i.split('password')[1])
-            elif i == '-n':
+            if i.startswith("password"):
+                length = int(i.split("password")[1])
+            elif i == "-n":
                 numbers = True
-            elif i == '-s':
+            elif i == "-s":
                 symbols = True
-            elif i == '-l':
+            elif i == "-l":
                 letters = True
-        password = generate_password(length=length, letters=letters, numbers=numbers, symbols=symbols)
+        password = generate_password(
+            length=length, letters=letters, numbers=numbers, symbols=symbols
+        )
         await utils.answer(message, self.strings("pass").format(password))

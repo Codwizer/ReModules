@@ -17,12 +17,29 @@ from telethon.tl.types import Message
 from .. import loader, utils
 
 responses = {
-    300: ("⛔ SEE_OTHER", "The request must be repeated, but directed to a different data center."),
-    400: ("⛔ BAD_REQUEST", "The query contains errors. In the event that a request was created using a form and contains user generated data, the user should be notified that the data must be corrected before the query is repeated."),
-    401: ("⛔ UNAUTHORIZED", "There was an unauthorized attempt to use functionality available only to authorized users."),
-    403: ("⛔ FORBIDDEN", "Privacy violation. For example, an attempt to write a message to someone who has blacklisted the current user."),
-    404: ("⛔ NOT_FOUND", "An attempt to invoke a non-existent object, such as a method"),
-    406: ("⛔ NOT_ACCEPTABLE", """
+    300: (
+        "⛔ SEE_OTHER",
+        "The request must be repeated, but directed to a different data center.",
+    ),
+    400: (
+        "⛔ BAD_REQUEST",
+        "The query contains errors. In the event that a request was created using a form and contains user generated data, the user should be notified that the data must be corrected before the query is repeated.",
+    ),
+    401: (
+        "⛔ UNAUTHORIZED",
+        "There was an unauthorized attempt to use functionality available only to authorized users.",
+    ),
+    403: (
+        "⛔ FORBIDDEN",
+        "Privacy violation. For example, an attempt to write a message to someone who has blacklisted the current user.",
+    ),
+    404: (
+        "⛔ NOT_FOUND",
+        "An attempt to invoke a non-existent object, such as a method",
+    ),
+    406: (
+        "⛔ NOT_ACCEPTABLE",
+        """
 Similar to <b>400 BAD_REQUESTS</b>, but the app must display the error to the user a bit differently.
 Do not display any visible error to the user when receiving the <b>rpc_error</b> constructor: instead, wait for an <a href="https://core.telegram.org/constructor/updateServiceNotification ">updateServiceNotification</a> update, and handle it as usual.
 Basically, an <a href="https://core.telegram.org/constructor/updateServiceNotification"updateServiceNotification</a> <b>pop-up</b> update will be emitted independently (ie NOT as an <a href="https://core.telegram.org/type/Updates">Updates</a> constructor inside <b>rpc_result</b> but as a normal update) immediately after emission of a 406 <b>rpc_error</b>: the update will contain the actual localized error message to show to the user with a UI popup.
@@ -31,11 +48,18 @@ An exception to this is the <b>AUTH_KEY_DUPLICATED</b> error, which is only emit
 Note that parallel connections are still allowed and actually recommended for media DCs.
 Also note that by session we mean a logged-in session identified by an <a href="https://core.telegram.org/constructor/authorization">authorization</a> constructor, fetchable using <a href="https://core.telegram.org/method/account.getAuthorizations">account.getAuthorizations</a>, not an MTProto session.
 
-If the client receives an <b>AUTH_KEY_DUPLICATED</b> error, the session was already invalidated by the server and the user must generate a new auth key and login again."""),
-    420: ("⛔ FLOOD", "The maximum allowed number of attempts to invoke the given method with the given input parameters has been exceeded. For example, in an attempt to request a large number of text messages (SMS) for the same phone number."),
-    500: ("⛔ INTERNAL", """An internal server error occurred while a request was being processed; for example, there was a disruption while accessing a database or file storage.
+If the client receives an <b>AUTH_KEY_DUPLICATED</b> error, the session was already invalidated by the server and the user must generate a new auth key and login again.""",
+    ),
+    420: (
+        "⛔ FLOOD",
+        "The maximum allowed number of attempts to invoke the given method with the given input parameters has been exceeded. For example, in an attempt to request a large number of text messages (SMS) for the same phone number.",
+    ),
+    500: (
+        "⛔ INTERNAL",
+        """An internal server error occurred while a request was being processed; for example, there was a disruption while accessing a database or file storage.
 
-If a client receives a 500 error, or you believe this error should not have occurred, please collect as much information as possible about the query and error and send it to the developers"""),
+If a client receives a 500 error, or you believe this error should not have occurred, please collect as much information as possible about the query and error and send it to the developers""",
+    ),
 }
 
 
@@ -84,8 +108,8 @@ class TelegramStatusCodes(loader.Module):
     async def tgcscmd(self, message: Message):
         """Get all telegram status codes"""
         await utils.answer(
-              message,
-              "\n".join(
-                  [f"<b>{str(sc)}: {text}</b>" for sc, (text, _) in responses.items()]
+            message,
+            "\n".join(
+                [f"<b>{str(sc)}: {text}</b>" for sc, (text, _) in responses.items()]
             ),
         )

@@ -63,9 +63,9 @@ class MusicMod(loader.Module):
                 )
         except:
             return await message.client.send_message(
-                message.chat_id,
-                self.strings("error").format(args=args)
+                message.chat_id, self.strings("error").format(args=args)
             )
+
     async def vkmcmd(self, message):
         """- найти трек по названию из VK"""
         args = utils.get_args_raw(message)
@@ -93,6 +93,5 @@ class MusicMod(loader.Module):
                 )
         except:
             return await message.client.send_message(
-                message.chat_id,
-                self.strings("error").format(args=args)
+                message.chat_id, self.strings("error").format(args=args)
             )

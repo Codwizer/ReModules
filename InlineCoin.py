@@ -22,24 +22,26 @@ from ..inline.types import InlineQuery
 logger = logging.getLogger(__name__)
 
 coin = [
-        "🌚 Выпал орёл!", 
-        "🌝 Выпала решка!", 
-        "🙀 Чудо, монетка осталась на ребре!", 
-        "🌚 Выпал орёл!", 
-        "🌚 Выпал орёл!", 
-        "🌝 Выпала решка!", 
-        "🌝 Выпала решка!"
-        ]
+    "🌚 Выпал орёл!",
+    "🌝 Выпала решка!",
+    "🙀 Чудо, монетка осталась на ребре!",
+    "🌚 Выпал орёл!",
+    "🌚 Выпал орёл!",
+    "🌝 Выпала решка!",
+    "🌝 Выпала решка!",
+]
+
 
 class CoinSexMod(loader.Module):
     """Mini game heads or tails"""
+
     strings = {"name": "InlineCoin"}
 
     @loader.inline_everyone
     async def coin_inline_handler(self, query: InlineQuery):
         coinrand = random.choice(coin)
         return {
-            "title" : "Орёл или решка?",
+            "title": "Орёл или решка?",
             "description": "Давай узнаем!",
             "message": f"<b>{coinrand}</b>",
             "thumb": "https://codwiz.site/files/coin.png",
