@@ -12,3 +12,5 @@ Memes
 AutofarmCookies
 AniLibria
 PastebinAPI
+shortener
+BirthdayTime
