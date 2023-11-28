@@ -23,9 +23,6 @@ from telethon import events
 
 from .. import loader, utils
 
-def register(cb):
-    cb(JacquesMod())
-
 class JacquesMod(loader.Module):
     """Жаконизатор"""
 
@@ -41,7 +38,7 @@ class JacquesMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
             "font",
-            "https://codwiz.site/files/open-sans.ttf",
+            "https://github.com/Codwizer/ReModules/blob/main/assets/OpenSans-Light.ttf",
             lambda: "добавьте ссылку на нужный вам шрифт",
             ),
             loader.ConfigValue(
@@ -69,7 +66,7 @@ class JacquesMod(loader.Module):
                 txt = reply.raw_text
         else:
             txt = utils.get_args_raw(message)
-        pic = requests.get("https://codwiz.site/files/module.jpg")
+        pic = requests.get("https://github.com/Codwizer/ReModules/blob/main/assets/IMG_20231128_152538.jpg")
         pic.raw.decode_content = True
         img = Image.open(io.BytesIO(pic.content)).convert("RGB")
 
