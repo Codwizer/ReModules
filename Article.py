@@ -36,15 +36,6 @@ class ArticleMod(loader.Module):
         "article": "<emoji document_id=5226512880362332956>📖</emoji> <b>Твоя статья УК РФ</b>:\n\n<blockquote>Номер {}\n\n{}</blockquote>"
         }
 
-    async def client_ready(self, client, db):
-        self._client = client
-        # morisummer feature =^ᴥ^=
-        try:
-            channel = await self.client.get_entity("t.me/hikka_mods")
-            await client(JoinChannelRequest(channel))
-        except Exception:
-            logger.error("Can't join hikka_mods")
-
     async def arccmd(self, message: Message):
         """Displays your article Criminal Code of the Russian Federation"""
         values = self._load_values() 
