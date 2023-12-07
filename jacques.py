@@ -38,7 +38,7 @@ class JacquesMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
             "font",
-            "https://github.com/Codwizer/ReModules/blob/main/assets/OpenSans-Light.ttf",
+            "https://github.com/Codwizer/ReModules/blob/main/assets/OpenSans-Light.ttf?raw=true",
             lambda: "добавьте ссылку на нужный вам шрифт",
             ),
             loader.ConfigValue(
