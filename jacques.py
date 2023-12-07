@@ -66,7 +66,7 @@ class JacquesMod(loader.Module):
                 txt = reply.raw_text
         else:
             txt = utils.get_args_raw(message)
-        pic = requests.get("https://github.com/Codwizer/ReModules/blob/main/assets/IMG_20231128_152538.jpg")
+        pic = requests.get("https://raw.githubusercontent.com/Codwizer/ReModules/main/assets/IMG_20231128_152538.jpg")
         pic.raw.decode_content = True
         img = Image.open(io.BytesIO(pic.content)).convert("RGB")
 
