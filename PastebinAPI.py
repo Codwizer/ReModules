@@ -26,7 +26,7 @@ class PastebinAPIMod(loader.Module):
     """PastebinAPI"""
 
     strings = {
-        "name": " PastebinAPI",
+        "name": "PastebinAPI",
         "no_reply": "<emoji document_id=5462882007451185227>🚫</emoji> Вы не указали текст",
         "no_key": "<emoji document_id=5843952899184398024>🚫</emoji> Ключ не найден",
         "done": "Ваша ссылка с кодом\n<emoji document_id=5985571061993837069>➡️</emoji> <code>{response_text}</code>"
