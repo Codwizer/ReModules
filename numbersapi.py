@@ -14,29 +14,34 @@
 
 from hikkatl.types import Message
 from .. import loader, utils
-import requests
 from datetime import datetime
+import aiohttp
+from deep_translator import GoogleTranslator
+# requires: aiohttp deep_translator
 
-
-def get_fact_about_number(number, fact_type):
+async def get_fact_about_number(number, fact_type):
     url = f"http://numbersapi.com/{number}/{fact_type}"
-    response = requests.get(url)
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            if response.status == 200:
+                text = await response.text()
+                translated = GoogleTranslator(source='auto', target='ru').translate(text)
+                return translated
+            else:
+                return "Извините, не удалось получить факт."
 
-    if response.status_code == 200:
-        return response.text
-    else:
-        return "Извините, не удалось получить факт."
 
-
-def get_fact_about_date(month, day):
+async def get_fact_about_date(month, day):
     date_str = datetime.now().replace(month=month, day=day).strftime("%m/%d")
     url = f"http://numbersapi.com/{date_str}/date"
-    response = requests.get(url)
-
-    if response.status_code == 200:
-        return response.text
-    else:
-        return "Извините, не удалось получить факт."
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            if response.status == 200:
+                text = await response.text()
+                translated = GoogleTranslator(source='auto', target='ru').translate(text)
+                return translated
+            else:
+                return "Извините, не удалось получить факт."
 
 
 @loader.tds
@@ -54,10 +59,10 @@ class NumbersAPI(loader.Module):
             fact_type = args[1]
             if "." in num_or_date:
                 month, day = map(int, num_or_date.split("."))
-                result = get_fact_about_date(month, day)
+                result = await get_fact_about_date(month, day)
             else:
                 number = int(num_or_date)
-                result = get_fact_about_number(number, fact_type)
+                result = await get_fact_about_number(number, fact_type)
             await utils.answer(message, f"{result}")
         else:
             await utils.answer(message, "Использование: .num <число или дата> <тип>")
