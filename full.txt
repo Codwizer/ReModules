@@ -12,5 +12,7 @@ Memes
 AutofarmCookies
 AniLibria
 PastebinAPI
-shortener
 BirthdayTime
+shortener
+Article
+InlineButton

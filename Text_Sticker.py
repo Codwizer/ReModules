@@ -15,7 +15,6 @@
 # requires: requests
 # ---------------------------------------------------------------------------------
 import io
-import logging
 from textwrap import wrap
 
 import requests
@@ -24,27 +23,24 @@ from PIL import ImageFont
 
 from .. import loader, utils
 
-logger = logging.getLogger(__name__)
 
 @loader.tds
 class TextinstickerMod(loader.Module):
     """Text to sticker"""
+
     strings = {
-            "name": "Text in sticker",
-            "error": "white st <color name> [text]",
-            }
-    
+        "name": "Text in sticker",
+        "error": "white st <color name> [text]",
+    }
+
     def __init__(self):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
-            "font",
-            "https://github.com/CodWize/ReModules/blob/main/assets/Samson.ttf?raw=true",
-            lambda: "add a link to the font you want",
+                "font",
+                "https://github.com/CodWize/ReModules/blob/main/assets/Samson.ttf?raw=true",
+                lambda: "add a link to the font you want",
             )
         )
-
-    async def client_ready(self, client, db):
-        self.client = client
 
     @loader.owner
     async def stcmd(self, message):
@@ -80,7 +76,7 @@ class TextinstickerMod(loader.Module):
         image = Image.new("RGBA", (1, 1), (0, 0, 0, 0))
         draw = ImageDraw.Draw(image)
         w, h = draw.multiline_textsize(text=text, font=font)
-        image = Image.new("RGBA", (w+100, h+100), (0, 0, 0, 0))
+        image = Image.new("RGBA", (w + 100, h + 100), (0, 0, 0, 0))
         draw = ImageDraw.Draw(image)
         draw.multiline_text((50, 50), text=text, font=font, fill=color, align="center")
         output = io.BytesIO()

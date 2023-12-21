@@ -13,24 +13,27 @@
 # scope: Music
 # scope: Music 0.0.1
 # ---------------------------------------------------------------------------------
-
-
 from .. import loader, utils
 
 
+@loader.tds
 class MusicMod(loader.Module):
     """Поиск музыки через музыкальных ботов."""
 
     strings = {
         "name": "Music",
         "nenashel": "<emoji document_id=5337117114392127164>🤷‍♂</emoji> <b>And what to look for?</b>",
-        "searching": "<emoji document_id=4918235297679934237>⌨️</emoji> <b>Search...</b>",
+        "searching": (
+            "<emoji document_id=4918235297679934237>⌨️</emoji> <b>Search...</b>"
+        ),
         "done": "<emoji document_id=5336965905773504919>🗣</emoji> <b>Maybe this is the track you were looking for</b>",
         "error": "<emoji document_id=5228947933545635555>😫</emoji> <b>I couldn't find a track with the title <code>{}</code><b>",
     }
 
     strings_ru = {
-        "nenashel": "<emoji document_id=5337117114392127164>🤷‍♂</emoji> <b>А что искать то?</b>",
+        "nenashel": (
+            "<emoji document_id=5337117114392127164>🤷‍♂</emoji> <b>А что искать то?</b>"
+        ),
         "searching": "<emoji document_id=4918235297679934237>⌨️</emoji> <b>Поиск...</b>",
         "done": "<emoji document_id=5336965905773504919>🗣</emoji> <b>Возможно, это тот трек, который вы искали</b>",
         "error": "<emoji document_id=5228947933545635555>😫</emoji> <b>Я не смог найти трек с названием <code>{}</code><b>",
@@ -63,9 +66,9 @@ class MusicMod(loader.Module):
                 )
         except:
             return await message.client.send_message(
-                message.chat_id,
-                self.strings("error").format(args=args)
+                message.chat_id, self.strings("error").format(args=args)
             )
+
     async def vkmcmd(self, message):
         """- найти трек по названию из VK"""
         args = utils.get_args_raw(message)
@@ -93,6 +96,5 @@ class MusicMod(loader.Module):
                 )
         except:
             return await message.client.send_message(
-                message.chat_id,
-                self.strings("error").format(args=args)
+                message.chat_id, self.strings("error").format(args=args)
             )

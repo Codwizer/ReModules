@@ -12,24 +12,20 @@
 # scope: Жаконизатор 0.0.1
 # ---------------------------------------------------------------------------------
 
-import io
-import os
-import re
+import io, re, os, requests
 from textwrap import wrap
 
-import requests
 from PIL import Image, ImageDraw, ImageFont
 from telethon import events
 
 from .. import loader, utils
 
+
+@loader.tds
 class JacquesMod(loader.Module):
     """Жаконизатор"""
 
-    strings = {
-        "name": "Жаконизатор",
-        "usage": "Напиши <code>.help Жаконизатор</code>"
-    }
+    strings = {"name": "Жаконизатор", "usage": "Напиши <code>.help Жаконизатор</code>"}
 
     def __init__(self):
         self.name = self.strings["name"]
@@ -37,19 +33,17 @@ class JacquesMod(loader.Module):
         self._ratelimit = []
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
-            "font",
-            "https://github.com/Codwizer/ReModules/blob/main/assets/OpenSans-Light.ttf?raw=true",
-            lambda: "добавьте ссылку на нужный вам шрифт",
+                "font",
+                "https://github.com/Codwizer/ReModules/blob/main/assets/OpenSans-Light.ttf?raw=true",
+                lambda: "добавьте ссылку на нужный вам шрифт",
             ),
             loader.ConfigValue(
-            "location",
-            "center",
-            "Можно указать left, right или center",
-            validator=loader.validators.Choice(
-                ["left", "right", "center"]
+                "location",
+                "center",
+                "Можно указать left, right или center",
+                validator=loader.validators.Choice(["left", "right", "center"]),
             ),
-        ),
-    )
+        )
 
     async def ionicmd(self, message):
         """<реплай на сообщение/свой текст>"""
@@ -66,7 +60,9 @@ class JacquesMod(loader.Module):
                 txt = reply.raw_text
         else:
             txt = utils.get_args_raw(message)
-        pic = requests.get("https://raw.githubusercontent.com/Codwizer/ReModules/main/assets/IMG_20231128_152538.jpg")
+        pic = requests.get(
+            "https://raw.githubusercontent.com/Codwizer/ReModules/main/assets/IMG_20231128_152538.jpg"
+        )
         pic.raw.decode_content = True
         img = Image.open(io.BytesIO(pic.content)).convert("RGB")
 
@@ -78,7 +74,9 @@ class JacquesMod(loader.Module):
         w, h = draw.multiline_textsize(t, font=font)
         imtext = Image.new("RGBA", (w + 10, h + 10), (0, 0, 0, 0))
         draw = ImageDraw.Draw(imtext)
-        draw.multiline_text((10, 10), t, (0, 0, 0), font=font, align=self.config["location"])
+        draw.multiline_text(
+            (10, 10), t, (0, 0, 0), font=font, align=self.config["location"]
+        )
         imtext.thumbnail((350, 195))
         w, h = 350, 195
         img.paste(imtext, (10, 10), imtext)
