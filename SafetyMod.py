@@ -44,7 +44,7 @@ class SafetyMod(loader.Module):
         "pass": "<emoji document_id=5472287483318245416>*⃣</emoji> <b>Here is your secure password:</b> <code>{}</code>",
     }
     strings_ru = {
-        "pass": "re_modules <emoji document_id=5472287483318245416>*⃣</emoji> <b>Вот ваш безопасный пароль:</b> <code>{}</code>"
+        "pass": "<emoji document_id=5472287483318245416>*⃣</emoji> <b>Вот ваш безопасный пароль:</b> <code>{}</code>"
     }
 
     async def passwordcmd(self, message):
