@@ -25,15 +25,15 @@ class face(loader.Module):
     strings = {
         "name": "face",
         "loading": (
-            "<emoji document_id=5348399448017871250>🔍</emoji> Ищю вам ascii face"
+            "<emoji document_id=5348399448017871250>🔍</emoji> Ищю вам kaomoji"
         ),
         "random_face": (
-            "<emoji document_id=5208878706717636743>🗿</emoji> Вот ваш рандомный ascii face\n<code>{}</code>"
+            "<emoji document_id=5208878706717636743>🗿</emoji> Вот ваш рандомный kaomoji\n<code>{}</code>"
         )
     }
 
     async def rfacecmd(self, message: Message):
-        """random ascii face"""
+        """random kaomoji"""
         await utils.answer(message, self.strings("loading"))
         response = requests.get("https://vsecoder.dev/api/faces")
         random_face = response.json()["data"]
