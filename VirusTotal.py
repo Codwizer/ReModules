@@ -61,8 +61,7 @@ class VirusTotalMod(loader.Module):
                 await utils.answer(message, self.strings("download"))
                 file_path = os.path.join(temp_dir, reply.file.name)
                 await reply.download_media(file_path)
-                logging.info(file_path)
-
+                
                 await utils.answer(message, self.strings("skan"))
                 file_name = os.path.basename(file_path)
 
