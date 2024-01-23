@@ -51,7 +51,7 @@ async def _status(user_id, token):
     return await _request(url, token)
 
 async def _logs(user_id, token):
-    url = f"/api/host/{user_id}/logs"
+    url = f"/api/host/{user_id}/logs/all"
     headers = {"accept": "application/json", "token": token}
     return await _request(url, token)
 
