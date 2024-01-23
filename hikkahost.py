@@ -151,7 +151,7 @@ class HikkahostMod(loader.Module):
         token = self.config['token']
         data = await _logs(user_id, token)
 
-        files_log = data["logs"]["logs"]
+        files_log = data["logs"]
 
         with open("log.txt", "w") as log_file:
             json.dump(files_log, log_file)
