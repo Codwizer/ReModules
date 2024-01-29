@@ -10,7 +10,7 @@
 -> [Channel](https://t.me/hikka_mods)
 -> [Chat](https://t.me/hikka_mods_chat)
 
-## 🆕 Instruction manual
+## 🆕 Instruction manuals
 
 <pre><code>.dlm https://raw.githubusercontent.com/Codwizer/ReModules/main/{name_modules}.py</code></pre>
 <hr>
