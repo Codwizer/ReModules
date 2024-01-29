@@ -15,7 +15,7 @@
 <pre><code>.dlm https://raw.githubusercontent.com/Codwizer/ReModules/main/{name_modules}.py</code></pre>
 <hr>
 
-### Installing the repository
+### Installing they repository
 > Install the repository
 <pre><code>.addrepo https://github.com/Codwizer/ReModules/raw/main</code></pre>
 > Installing the module
