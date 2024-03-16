@@ -16,3 +16,8 @@ BirthdayTime
 shortener
 Article
 InlineButton
+face
+numbersapi
+hikkahost
+globalrestrict
+geminiai

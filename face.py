@@ -25,11 +25,20 @@ class face(loader.Module):
     strings = {
         "name": "face",
         "loading": (
+            "<emoji document_id=5348399448017871250>🔍</emoji> I'm looking for you kaomoji"
+        ),
+        "random_face": (
+            "<emoji document_id=5208878706717636743>🗿</emoji> Here is your random one kaomoji\n<code>{}</code>"
+        ),
+    }
+
+    strings_ru = {
+        "loading": (
             "<emoji document_id=5348399448017871250>🔍</emoji> Ищю вам kaomoji"
         ),
         "random_face": (
             "<emoji document_id=5208878706717636743>🗿</emoji> Вот ваш рандомный kaomoji\n<code>{}</code>"
-        )
+        ),
     }
 
     async def rfacecmd(self, message: Message):

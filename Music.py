@@ -22,12 +22,12 @@ class MusicMod(loader.Module):
 
     strings = {
         "name": "Music",
-        "nenashel": "<emoji document_id=5337117114392127164>🤷‍♂</emoji> <b>And what to look for?</b>",
-        "searching": (
-            "<emoji document_id=4918235297679934237>⌨️</emoji> <b>Search...</b>"
+        "nenashel": (
+            "<emoji document_id=5337117114392127164>🤷‍♂</emoji> <b>And what should I look for?</b>"
         ),
-        "done": "<emoji document_id=5336965905773504919>🗣</emoji> <b>Maybe this is the track you were looking for</b>",
-        "error": "<emoji document_id=5228947933545635555>😫</emoji> <b>I couldn't find a track with the title <code>{}</code><b>",
+        "searching": "<emoji document_id=4918235297679934237>⌨️</emoji> <b>Searching...</b>",
+        "done": "<emoji document_id=5336965905773504919>🗣</emoji> <b>Perhaps this is the track you were looking for</b>",
+        "error": "<emoji document_id=5228947933545635555>😫</emoji> <b>I couldn't find a track with the title <code>{}</code></b>",
     }
 
     strings_ru = {
@@ -43,7 +43,7 @@ class MusicMod(loader.Module):
         """- найти трек по названию из Yandex music"""
         args = utils.get_args_raw(message)
         r = await message.get_reply_message()
-        bot = "@music_yandex_bot"
+        bot = "@Yandex_music_download_bot"
         if not args:
             return await message.edit(self.strings("nenashel"))
         try:

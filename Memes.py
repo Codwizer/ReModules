@@ -50,6 +50,12 @@ class MemesMod(loader.Module):
 
     strings = {
         "name": "Memes",
+        "done": "☄️ Catch the meme",
+        "still": "🔄 Update",
+        "dell": "❌ Close",
+    }
+
+    strings_ru = {
         "done": "☄️ Лови мем",
         "still": "🔄 Обновить",
         "dell": "❌ Закрыть",

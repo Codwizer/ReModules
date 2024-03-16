@@ -29,6 +29,14 @@ class PastebinAPIMod(loader.Module):
     strings = {
         "name": "PastebinAPI",
         "no_reply": (
+            "<emoji document_id=5462882007451185227>🚫</emoji> You didn't specify the text"
+        ),
+        "no_key": "<emoji document_id=5843952899184398024>🚫</emoji> The key was not found",
+        "done": "Your link with the code\n<emoji document_id=5985571061993837069>➡️</emoji> <code>{response_text}</code>",
+    }
+
+    strings_ru = {
+        "no_reply": (
             "<emoji document_id=5462882007451185227>🚫</emoji> Вы не указали текст"
         ),
         "no_key": "<emoji document_id=5843952899184398024>🚫</emoji> Ключ не найден",
@@ -66,7 +74,6 @@ class PastebinAPIMod(loader.Module):
                     "api_option": "paste",
                 },
             ) as response:
-
                 response_text = await response.text()
 
                 await utils.answer(

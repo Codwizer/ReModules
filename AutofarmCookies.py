@@ -28,6 +28,16 @@ class AutofarmCookiesMod(loader.Module):
     strings = {
         "name": "AutofarmCookies",
         "farmon": (
+            "<i>The deferred task has been created, autofarming has been started, everything will start in 10 minutes"
+            " seconds...</i>"
+        ),
+        "farmon_already": "<i>It has already been launched :)</i>",
+        "farmoff": "<i>The autopharm is stopped\nSelected:</i> <b>%coins% Cookies</b>",
+        "farm": "<i>I typed:</i> <b>%coins% Cookies</b>",
+    }
+
+    strings_ru = {
+        "farmon": (
             "<i>Отложенная задача создана, автофарминг запущен, всё начнётся через 10"
             " секунд...</i>"
         ),

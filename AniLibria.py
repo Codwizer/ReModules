@@ -28,12 +28,21 @@ class AniLibriaMod(loader.Module):
 
     strings = {
         "name": "AniLibria",
-        "announce": "<b>Анонс</b> :",
-        "status": "<b>Статус</b> :",
-        "type": "<b>Тип</b> :",
-        "genres": "<b>Жанры</b> :",
-        "favorite": "<b>Избранное &lt;3</b> :",  # &lt; == <
-        "season": "<b>Сезон</b> :",
+        "announce": "<b>The announcement</b>:",
+        "status": "<b>Status</b>:",
+        "type": "<b>Type</b>:",
+        "genres": "<b>Genres</b>:",
+        "favorite": "<b>Favourites &lt;3</b>:",  # &lt; == <
+        "season": "<b>Season</b>:",
+    }
+
+    strings_ru = {
+        "announce": "<b>Анонс</b>:",
+        "status": "<b>Статус</b>:",
+        "type": "<b>Тип</b>:",
+        "genres": "<b>Жанры</b>:",
+        "favorite": "<b>Избранное &lt;3</b>:",  # &lt; == <
+        "season": "<b>Сезон</b>:",
     }
 
     link = "https://anilibria.tv"

@@ -21,9 +21,17 @@ from ..inline.types import InlineCall, InlineQuery
 
 @loader.tds
 class Search(loader.Module):
+    """Поисковик"""
 
     strings = {
         "name": "Search",
+        "search": "<emoji document_id=5188311512791393083>🌎</emoji><b> I searched for information for you</b> ",
+        "isearch": "🔎<b> I searched for information for you</b> ",
+        "link": "🗂️ Link to your request",
+        "close": "❌ Close",
+    }
+
+    strings_ru = {
         "search": "<emoji document_id=5188311512791393083>🌎</emoji><b> Я поискал информацию за тебя</b> ",
         "isearch": "🔎<b> Я поискал информацию за тебя</b> ",
         "link": "🗂️ Ссылка на ваш запрос",

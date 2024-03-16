@@ -25,7 +25,9 @@ from .. import loader, utils
 class JacquesMod(loader.Module):
     """Жаконизатор"""
 
-    strings = {"name": "Жаконизатор", "usage": "Напиши <code>.help Жаконизатор</code>"}
+    strings = {"name": "Жаконизатор", "usage": "Write <code>.help Жаконизатор</code>"}
+
+    strings_ru = {"usage": "Напиши <code>.help Жаконизатор</code>"}
 
     def __init__(self):
         self.name = self.strings["name"]

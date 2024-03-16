@@ -18,12 +18,8 @@ from datetime import datetime, timedelta, timezone
 from .. import loader, utils
 
 
-async def _request(
-    path: str,
-    token: str,
-    method: str = "GET"
-) -> dict:
-    url = 'http://api.hikkahost.tech:7777' + path
+async def _request(path: str, token: str, method: str = "GET") -> dict:
+    url = "http://api.hikkahost.tech:7777" + path
     async with aiohttp.ClientSession(trust_env=True) as session:
         async with session.request(
             method,
@@ -41,6 +37,7 @@ async def _stats(user_id, token):
     url = f"/api/host/{user_id}/stats"
     return await _request(url, token)
 
+
 async def _host(user_id, token):
     url = f"/api/host/{user_id}"
     return await _request(url, token)
@@ -50,6 +47,7 @@ async def _status(user_id, token):
     url = f"/api/host/{user_id}/status"
     return await _request(url, token)
 
+
 async def _logs(user_id, token):
     url = f"/api/host/{user_id}/logs/all"
     headers = {"accept": "application/json", "token": token}
@@ -58,7 +56,7 @@ async def _logs(user_id, token):
 
 async def _action(user_id, token):
     url = f"/api/host/{user_id}?action=restart"
-    return await _request(url, token, 'PUT')
+    return await _request(url, token, "PUT")
 
 
 def bytes_to_megabytes(b: int):
@@ -71,6 +69,27 @@ class HikkahostMod(loader.Module):
 
     strings = {
         "name": "HikkaHost",
+        "info": (
+            "<emoji document_id=5879770735999717115>👤</emoji> <b>Information panel</b>\n\n"
+            "<emoji document_id=5974526806995242353>🆔</emoji> <b>Server ID:</b> <code>{server_id}</code>\n"
+            "<emoji document_id=6005570495603282482>🔑</emoji> <b>ID:</b> <code>{id}</code>\n"
+            "<emoji document_id=5874986954180791957>📶</emoji> <b>Status:</b> <code>{status}</code>\n"
+            "<emoji document_id=5451646226975955576>⌛️</emoji> <b>Subscription ends:</b> <code>{end_dates}</code> | <code>{days_end} days</code>\n\n"
+            "<emoji document_id=5877260593903177342>⚙️</emoji> <b>CPU:</b> <code>{cpu_percent} %</code>\n"
+            "<emoji document_id=5379652232813750191>💾</emoji> <b>RAM:</b> <code>{memory} MB</code>"
+        ),
+        "logs": (
+            "<emoji document_id=5188377234380954537>🌘</emoji> <b>Here are your logs</b>"
+        ),
+        "restart": (
+            "<emoji document_id=5789886476472815477>✅</emoji> <b>Restart request sent</b>\n"
+            "This message remains unchanged after the restart"
+        ),
+        "loading_info": "<emoji document_id=5451646226975955576>⌛️</emoji> Loading...",
+        "no_apikey": "<emoji document_id=5260342697075416641>🚫</emoji> You have not specified an API Key\nTo get a token.\n\n1. Go to the @hikkahost_bot\n2. Write /token\n3. Paste it into the config",
+    }
+
+    strings_ru = {
         "info": (
             "<emoji document_id=5879770735999717115>👤</emoji> <b>Панель информации</b>\n\n"
             "<emoji document_id=5974526806995242353>🆔</emoji> <b>Server ID:</b> <code>{server_id}</code>\n"
@@ -109,7 +128,7 @@ class HikkahostMod(loader.Module):
             return
 
         user_id = self.tg_id
-        token = self.config['token']
+        token = self.config["token"]
         data = await _stats(user_id, token)
         datas = await _status(user_id, token)
 
@@ -121,7 +140,9 @@ class HikkahostMod(loader.Module):
 
         host = await _host(user_id, token)
         server_id = host["host"]["server_id"]
-        target_data = datetime.fromisoformat(host["host"]["end_date"].replace("Z", "+00:00")).replace(tzinfo=timezone.utc)
+        target_data = datetime.fromisoformat(
+            host["host"]["end_date"].replace("Z", "+00:00")
+        ).replace(tzinfo=timezone.utc)
         current_data = datetime.now(timezone.utc)
         days_end = (target_data - current_data).days
         data_end = current_data.strftime("%d-%m-%Y %H-%M")
@@ -136,7 +157,13 @@ class HikkahostMod(loader.Module):
         await utils.answer(
             message,
             self.strings("info").format(
-                server_id=server_id, id=user_id, status=status, end_dates=end_dates, days_end=days_end,  cpu_percent=cpu_percent, memory=memory
+                server_id=server_id,
+                id=user_id,
+                status=status,
+                end_dates=end_dates,
+                days_end=days_end,
+                cpu_percent=cpu_percent,
+                memory=memory,
             ),
         )
 
@@ -148,7 +175,7 @@ class HikkahostMod(loader.Module):
             return
 
         user_id = self.tg_id
-        token = self.config['token']
+        token = self.config["token"]
         data = await _logs(user_id, token)
 
         files_log = data["logs"]
@@ -167,6 +194,6 @@ class HikkahostMod(loader.Module):
             return
 
         user_id = self.tg_id
-        token = self.config['token']
+        token = self.config["token"]
 
         data = await _action(user_id, token)

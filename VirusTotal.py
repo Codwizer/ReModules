@@ -17,9 +17,27 @@ from .. import loader, utils
 from hikkatl.tl.types import Message
 
 
+@loader.tds
 class VirusTotalMod(loader.Module):
+    """Checks files for viruses using VirusTotal"""
+
     strings = {
         "name": "VirusTotal",
+        "no_file": "<emoji document_id=5210952531676504517>🚫</emoji> </b>You haven't selected a file.</b>",
+        "download": (
+            "<emoji document_id=5334677912270415274>😑</emoji> </b>Downloading...</b>"
+        ),
+        "skan": "<emoji document_id=5325792861885570739>🫥</emoji>  <b>Scanning...</b>",
+        "link": "🦠 VirusTotal Link",
+        "no_virus": "✅ File is clean.",
+        "error": "Scan error.",
+        "no_format": "This format is not supported.",
+        "no_apikey": (
+            "<emoji document_id=5260342697075416641>🚫</emoji> You have not specified an API Key"
+        ),
+    }
+
+    strings_ru = {
         "no_file": "<emoji document_id=5210952531676504517>🚫</emoji> </b>Вы не выбрали файл.</b>",
         "download": (
             "<emoji document_id=5334677912270415274>😑</emoji> </b>Скачивание...</b>"
@@ -61,7 +79,7 @@ class VirusTotalMod(loader.Module):
                 await utils.answer(message, self.strings("download"))
                 file_path = os.path.join(temp_dir, reply.file.name)
                 await reply.download_media(file_path)
-                
+
                 await utils.answer(message, self.strings("skan"))
                 file_name = os.path.basename(file_path)
 

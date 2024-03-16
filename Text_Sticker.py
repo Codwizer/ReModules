@@ -33,6 +33,10 @@ class TextinstickerMod(loader.Module):
         "error": "white st <color name> [text]",
     }
 
+    strings_ru = {
+        "error": "Укажите .st <color name> [text]",
+    }
+
     def __init__(self):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(

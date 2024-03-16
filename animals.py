@@ -24,8 +24,13 @@ class animals(loader.Module):
 
     strings = {
         "name": "animals",
-        "loading": "Generation is underway",
-        "done": "Here is your salute",
+        "loading": "<b>Generation is underway</b>",
+        "done": "<b>Here is your salute</b>",
+    }
+
+    strings_ru = {
+        "loading": "<b>Генерация идет полным ходом</b>",
+        "done": "<b>Вот ваш результат</b>",
     }
 
     async def fcatcmd(self, message: Message):

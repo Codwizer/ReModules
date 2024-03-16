@@ -36,6 +36,15 @@ class DaysToMyBirthday(loader.Module):
 
     strings = {
         "name": "BirthdayTime",
+        "date_error": "<emoji document_id=5422840512681877946>❗️</emoji> <b>Your birthdate is not specified in the config, please correct this :)</b>",
+        "msg": (
+            "<emoji document_id=5377476217698001788>🎉</emoji> <b>"
+            "There are {} days, {} hours, {} minutes, and {} seconds left until your birthday. \n<emoji document_id=5377442914521588226>"
+            "💙</emoji> {}</b>"
+        ),
+    }
+
+    strings_ru = {
         "date_error": "<emoji document_id=5422840512681877946>❗️</emoji> <b>В конфиге не указан день вашего рождения, пожалуйста, исправь это :)</b>",
         "msg": (
             "<emoji document_id=5377476217698001788>🎉</emoji> <b>"

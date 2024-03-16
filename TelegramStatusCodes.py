@@ -72,7 +72,7 @@ class TelegramStatusCodes(loader.Module):
         "args_incorrect": "<b>Incorrect args</b>",
         "not_found": "<b>Code not found</b>",
         "syntax_error": "<b>Args are mandatory</b>",
-        "scode": "<b>{} {}</b>\n⚜️ Описание кода: <i>{}</i>",
+        "scode": "<b>{} {}</b>\n⚜️ Code Description: <i>{}</i>",
     }
 
     strings_ru = {
