@@ -19,7 +19,7 @@ from .. import loader, utils
 
 
 async def _request(path: str, token: str, method: str = "GET") -> dict:
-    url = "http://158.160.8.70:5000" + path
+    url = "http://158.160.84.24:5000" + path
     async with aiohttp.ClientSession(trust_env=True) as session:
         async with session.request(
             method,
