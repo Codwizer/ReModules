@@ -87,6 +87,7 @@ class HikkahostMod(loader.Module):
         ),
         "loading_info": "<emoji document_id=5451646226975955576>⌛️</emoji> Loading...",
         "no_apikey": "<emoji document_id=5260342697075416641>🚫</emoji> You have not specified an API Key\nTo get a token.\n\n1. Go to the @hikkahost_bot\n2. Write /token\n3. Paste it into the config",
+        "condition": "works",
     }
 
     strings_ru = {
@@ -108,6 +109,7 @@ class HikkahostMod(loader.Module):
         ),
         "loading_info": "<emoji document_id=5451646226975955576>⌛️</emoji> Загрузка...",
         "no_apikey": "<emoji document_id=5260342697075416641>🚫</emoji> Вы не указали Api Key\nЧтобы получить token.\n\n1. Перейдите в бота @hikkahost_bot\n2. Напишите /token\n3. Вставьте его в конфиг",
+        "condition": "работает",
     }
 
     def __init__(self):
@@ -152,7 +154,7 @@ class HikkahostMod(loader.Module):
             cpu_percent = round((cpu_stats_usage / system_cpu_usage) * 100.0, 2)
 
         if "status" in datas and datas["status"] == "running":
-            status = "работает"
+            status = self.strings("condition")
 
         await utils.answer(
             message,
