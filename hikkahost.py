@@ -67,6 +67,8 @@ def bytes_to_megabytes(b: int):
 class HikkahostMod(loader.Module):
     """Hikkahost manager."""
 
+    MAX_RAM = 750
+
     strings = {
         "name": "HikkaHost",
         "info": (
@@ -76,7 +78,7 @@ class HikkahostMod(loader.Module):
             "<emoji document_id=5874986954180791957>📶</emoji> <b>Status:</b> <code>{status}</code>\n"
             "<emoji document_id=5451646226975955576>⌛️</emoji> <b>Subscription ends:</b> <code>{end_dates}</code> | <code>{days_end} days</code>\n\n"
             "<emoji document_id=5877260593903177342>⚙️</emoji> <b>CPU:</b> <code>{cpu_percent} %</code>\n"
-            "<emoji document_id=5379652232813750191>💾</emoji> <b>RAM:</b> <code>{memory} MB</code>"
+            "<emoji document_id=5379652232813750191>💾</emoji> <b>RAM:</b> <code>{memory} / {max_ram} MB</code> <b>{ram_percent}</b>"
         ),
         "logs": (
             "<emoji document_id=5188377234380954537>🌘</emoji> <b>Here are your logs</b>"
@@ -98,7 +100,7 @@ class HikkahostMod(loader.Module):
             "<emoji document_id=5874986954180791957>📶</emoji> <b>Статус:</b> <code>{status}</code>\n"
             "<emoji document_id=5451646226975955576>⌛️</emoji> <b>Подписка закончится:</b> <code>{end_dates}</code> | <code>{days_end} дней</code>\n\n"
             "<emoji document_id=5877260593903177342>⚙️</emoji> <b>CPU:</b> <code>{cpu_percent} %</code>\n"
-            "<emoji document_id=5379652232813750191>💾</emoji> <b>RAM:</b> <code>{memory} MB</code>"
+            "<emoji document_id=5379652232813750191>💾</emoji> <b>RAM:</b> <code>{memory} / {max_ram} MB</code> <b>{ram_percent}</b>"
         ),
         "logs": (
             "<emoji document_id=5188377234380954537>🌘</emoji> <b>Вот ваши логи</b>"
@@ -129,8 +131,8 @@ class HikkahostMod(loader.Module):
             await utils.answer(message, self.strings("no_apikey"))
             return
 
-        user_id = self.tg_id
         token = self.config["token"]
+        user_id = token.split(":")[0]
         data = await _stats(user_id, token)
         datas = await _status(user_id, token)
 
@@ -153,6 +155,8 @@ class HikkahostMod(loader.Module):
         if cpu_stats_usage and system_cpu_usage:
             cpu_percent = round((cpu_stats_usage / system_cpu_usage) * 100.0, 2)
 
+        ram_percent = round(bytes_to_megabytes(memory_stats / self.MAX_RAM) * 100, 2)
+
         if "status" in datas and datas["status"] == "running":
             status = self.strings("condition")
 
@@ -166,6 +170,8 @@ class HikkahostMod(loader.Module):
                 days_end=days_end,
                 cpu_percent=cpu_percent,
                 memory=memory,
+                max_ram=self.MAX_RAM,
+                ram_percent=ram_percent,
             ),
         )
 
@@ -176,8 +182,8 @@ class HikkahostMod(loader.Module):
             await utils.answer(message, self.strings("no_apikey"))
             return
 
-        user_id = self.tg_id
         token = self.config["token"]
+        user_id = token.split(":")[0]
         data = await _logs(user_id, token)
 
         files_log = data["logs"]
@@ -195,7 +201,7 @@ class HikkahostMod(loader.Module):
             await utils.answer(message, self.strings("no_apikey"))
             return
 
-        user_id = self.tg_id
         token = self.config["token"]
+        user_id = token.split(":")[0]
 
         data = await _action(user_id, token)
