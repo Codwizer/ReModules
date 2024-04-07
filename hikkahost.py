@@ -78,7 +78,7 @@ class HikkahostMod(loader.Module):
             "<emoji document_id=5874986954180791957>📶</emoji> <b>Status:</b> <code>{status}</code>\n"
             "<emoji document_id=5451646226975955576>⌛️</emoji> <b>Subscription ends:</b> <code>{end_dates}</code> | <code>{days_end} days</code>\n\n"
             "<emoji document_id=5877260593903177342>⚙️</emoji> <b>CPU:</b> <code>{cpu_percent} %</code>\n"
-            "<emoji document_id=5379652232813750191>💾</emoji> <b>RAM:</b> <code>{memory} / {max_ram} MB</code> <b>{ram_percent}</b>"
+            "<emoji document_id=5379652232813750191>💾</emoji> <b>RAM:</b> <code>{memory} / {max_ram} MB</code> <b>{ram_percent} %</b>"
         ),
         "logs": (
             "<emoji document_id=5188377234380954537>🌘</emoji> <b>Here are your logs</b>"
@@ -100,7 +100,7 @@ class HikkahostMod(loader.Module):
             "<emoji document_id=5874986954180791957>📶</emoji> <b>Статус:</b> <code>{status}</code>\n"
             "<emoji document_id=5451646226975955576>⌛️</emoji> <b>Подписка закончится:</b> <code>{end_dates}</code> | <code>{days_end} дней</code>\n\n"
             "<emoji document_id=5877260593903177342>⚙️</emoji> <b>CPU:</b> <code>{cpu_percent} %</code>\n"
-            "<emoji document_id=5379652232813750191>💾</emoji> <b>RAM:</b> <code>{memory} / {max_ram} MB</code> <b>{ram_percent}</b>"
+            "<emoji document_id=5379652232813750191>💾</emoji> <b>RAM:</b> <code>{memory} / {max_ram} MB</code> <b>{ram_percent} %</b>"
         ),
         "logs": (
             "<emoji document_id=5188377234380954537>🌘</emoji> <b>Вот ваши логи</b>"
