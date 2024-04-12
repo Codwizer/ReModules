@@ -13,6 +13,7 @@
 # ---------------------------------------------------------------------------------
 
 import os, json, aiohttp, tempfile
+from vt import Client
 from .. import loader, utils
 from hikkatl.tl.types import Message
 
@@ -64,13 +65,17 @@ class VirusTotalMod(loader.Module):
 
     @loader.command()
     async def vt(self, message: Message):
-        """<response to the file> - Checks files for viruses using VirusTotal"""
-        reply = await message.get_reply_message()
-        if not reply:
-            await utils.answer(message, self.strings("no_file"))
+        """<ответ на файл> - Проверяет файлы на наличие вирусов с использованием VirusTotal"""
+        if not message.is_reply:
+            await utils.answer(message, self.strings("no_reply"))
             return
 
-        if self.config["token-vt"] is None:
+        reply = await message.get_reply_message()
+        if not reply.document:
+            await utils.answer(message, self.strings("reply_not_document"))
+            return
+
+        if not self.config.get("token-vt"):
             await utils.answer(message, self.strings("no_apikey"))
             return
 
@@ -80,71 +85,66 @@ class VirusTotalMod(loader.Module):
                 file_path = os.path.join(temp_dir, reply.file.name)
                 await reply.download_media(file_path)
 
-                await utils.answer(message, self.strings("skan"))
-                file_name = os.path.basename(file_path)
+                file_extension = os.path.splitext(reply.file.name)[1].lower()
+                allowed_extensions = (
+                    ".jpg",
+                    ".png",
+                    ".ico",
+                    ".mp3",
+                    ".mp4",
+                    ".gif",
+                    ".txt",
+                )
 
-                if file_name not in [
-                    "file.jpg",
-                    "file.png",
-                    "file.ico",
-                    "file.mp3",
-                    "file.mp4",
-                    "file.gif",
-                    "file.txt",
-                ]:
-                    token = self.config["token-vt"]
-                    params = dict(apikey=token)
-
+                if file_extension not in allowed_extensions:
                     try:
+                        token = self.config["token-vt"]
+                        headers = {"x-apikey": token}
+                        params = {"apikey": token}
+
+                        # Отправляем файл на сканирование
                         with open(file_path, "rb") as file:
-                            files = {"file": (file_name, file)}
-                            data = aiohttp.FormData()
-                            data.add_field("file", file, filename=file_name)
+                            files = {"file": file}
                             async with session.post(
-                                "https://www.virustotal.com/vtapi/v2/file/scan",
-                                data=data,
+                                "https://www.virustotal.com/api/v3/files",
+                                headers=headers,
                                 params=params,
+                                data=files,
                             ) as response:
                                 if response.status == 200:
-                                    false = []
                                     result = await response.json()
-                                    res = (
-                                        (json.dumps(result, sort_keys=False, indent=4))
-                                        .split()[10]
-                                        .split('"')[1]
-                                    )
-                                    params = {"apikey": token, "resource": res}
+                                    data_id = result["data"]["id"]
+
+                                    # Получаем отчет о сканировании
                                     async with session.get(
-                                        "https://www.virustotal.com/vtapi/v2/file/report",
+                                        f"https://www.virustotal.com/api/v3/analyses/{data_id}",
+                                        headers=headers,
                                         params=params,
                                     ) as response:
                                         if response.status == 200:
                                             result = await response.json()
-                                            for key in result["scans"]:
-                                                if result["scans"][key]["detected"]:
-                                                    false.append(
-                                                        f"⛔️ <b>{key}</b>\n ╰ <code>{result['scans'][key]['result']}</code>"
+                                            detections = []
+                                            for engine, details in result["data"][
+                                                "attributes"
+                                            ]["results"].items():
+                                                if details["category"] == "malicious":
+                                                    detections.append(
+                                                        f"⛔️ <b>{engine}</b>\n ╰ <code>{details['result']}</code>"
                                                     )
                                             out = (
-                                                "\n".join(false)
-                                                if len(false) > 0
+                                                "\n".join(detections)
+                                                if detections
                                                 else self.strings("no_virus")
                                             )
-                                            uyrl = f"https://www.virustotal.com/gui/file/{result['resource']}/detection"
+                                            url = f"https://www.virustotal.com/gui/url/{data_id}/detection"
                                             await self.inline.form(
-                                                text=f"Detections: {len(false)} / {len(result['scans'])}\n\n{out}\n\n",
+                                                text=f"Detections: {len(detections)} / {len(result['data']['attributes']['results'])}\n\n{out}\n\n",
                                                 message=message,
                                                 reply_markup={
                                                     "text": self.strings("link"),
-                                                    "url": uyrl,
+                                                    "url": url,
                                                 },
                                             )
-                                        else:
-                                            await utils.answer(
-                                                message, self.strings("error")
-                                            )
-                                else:
-                                    await utils.answer(message, self.strings("error"))
                     except Exception as e:
                         await utils.answer(
                             message,
