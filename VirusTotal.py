@@ -9,7 +9,7 @@
 # meta developer: @hikka_mods
 # scope: Api VirusTotal
 # scope: Api VirusTotal 0.0.1
-# requires: json, aiohttp, tempfile
+# requires: json aiohttp tempfile
 # ---------------------------------------------------------------------------------
 
 import os, json, aiohttp, tempfile
