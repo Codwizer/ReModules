@@ -13,7 +13,6 @@
 # ---------------------------------------------------------------------------------
 
 import os, json, aiohttp, tempfile
-from vt import Client
 from .. import loader, utils
 from hikkatl.tl.types import Message
 
