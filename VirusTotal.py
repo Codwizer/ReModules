@@ -122,6 +122,7 @@ class VirusTotalMod(loader.Module):
                                     ) as response:
                                         if response.status == 200:
                                             result = await response.json()
+                                            hash = result["meta"]["file_info"]["sha256"]
                                             detections = []
                                             for engine, details in result["data"][
                                                 "attributes"
@@ -135,7 +136,7 @@ class VirusTotalMod(loader.Module):
                                                 if detections
                                                 else self.strings("no_virus")
                                             )
-                                            url = f"https://www.virustotal.com/gui/url/{data_id}/detection"
+                                            url = f"https://www.virustotal.com/gui/file/{hash}/detection"
                                             await self.inline.form(
                                                 text=f"Detections: {len(detections)} / {len(result['data']['attributes']['results'])}\n\n{out}\n\n",
                                                 message=message,
