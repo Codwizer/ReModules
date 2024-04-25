@@ -20,6 +20,8 @@ from telethon.tl.types import Message
 
 from .. import loader, utils
 
+__version__ = (1, 0, 0)
+
 
 @loader.tds
 class AutofarmCookiesMod(loader.Module):

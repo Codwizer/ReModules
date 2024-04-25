@@ -16,6 +16,8 @@ import os, json, aiohttp, tempfile
 from .. import loader, utils
 from hikkatl.tl.types import Message
 
+__version__ = (1, 0, 0)
+
 
 @loader.tds
 class VirusTotalMod(loader.Module):

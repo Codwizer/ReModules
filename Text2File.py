@@ -1,37 +1,36 @@
-#Name: Text2File
-#Description: Module for convertation your text to file
-#Author: @nervousmods
-#Commands:
-#.ttf
+# Name: Text2File
+# Description: Module for convertation your text to file
+# Author: @nervousmods
+# Commands:
+# .ttf
 # ---------------------------------------------------------------------------------
-#🔒 Licensed under the GNU GPLv3
-#🌐 https://www.gnu.org/licenses/agpl-3.0.html
-#⚠️ All modules is not scam and absolutely safe.
-#👤 https://t.me/smlgwy
-#-----------------------------------------------------------------------------------
-#meta developer: @nervousmods, @hikka_mods
-#scope: hikka_only 
-#scope: hikka_min 1.4.2
-#-----------------------------------------------------------------------------------
+# 🔒 Licensed under the GNU GPLv3
+# 🌐 https://www.gnu.org/licenses/agpl-3.0.html
+# ⚠️ All modules is not scam and absolutely safe.
+# 👤 https://t.me/smlgwy
+# -----------------------------------------------------------------------------------
+# meta developer: @nervousmods, @hikka_mods
+# scope: hikka_only
+# scope: hikka_min 1.4.2
+# -----------------------------------------------------------------------------------
 
 from hikka import loader, utils
-import logging
 from telethon.tl.types import Message
 import io
 
 __version__ = (1, 0, 0)
-logger = logging.getLogger(__name__)
+
 
 @loader.tds
 class Text2File(loader.Module):
     """Module for convertation your text to file"""
+
     def __init__(self):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "name",
                 "file.txt",
-                lambda:
-                self.strings("cfg_name"),
+                lambda: self.strings("cfg_name"),
             ),
         )
 

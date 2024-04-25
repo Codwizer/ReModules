@@ -17,6 +17,8 @@ import json
 from datetime import datetime, timedelta, timezone
 from .. import loader, utils
 
+__version__ = (1, 0, 0)
+
 
 async def _request(path: str, token: str, method: str = "GET") -> dict:
     url = "http://158.160.84.24:5000" + path

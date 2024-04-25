@@ -17,6 +17,8 @@ import random
 
 from ..inline.types import InlineQuery
 
+__version__ = (1, 0, 0)
+
 coin = [
     "🌚 Выпал орёл!",
     "🌝 Выпала решка!",
@@ -32,14 +34,20 @@ coin = [
 class CoinSexMod(loader.Module):
     """Mini game heads or tails"""
 
-    strings = {"name": "InlineCoin"}
+    strings = {
+        "name": "InlineCoin",
+        "titles": "Heads or tails?",
+        "description": "Let's find out!",
+    }
+
+    strings_ru = {"titles": "Орёл или решка?", "description": "Давай узнаем!"}
 
     @loader.inline_everyone
     async def coin_inline_handler(self, query: InlineQuery):
         coinrand = random.choice(coin)
         return {
-            "title": "Орёл или решка?",
-            "description": "Давай узнаем!",
+            "title": self.strings("titles"),
+            "description": self.strings("description"),
             "message": f"<b>{coinrand}</b>",
-            "thumb": "https://codwiz.site/files/coin.png",
+            "thumb": "https://github.com/Codwizer/ReModules/blob/main/assets/images.png",
         }

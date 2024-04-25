@@ -25,7 +25,6 @@
 import re
 import time
 import typing
-import logging
 
 from telethon.tl.functions.channels import (
     JoinChannelRequest,
@@ -59,7 +58,7 @@ from telethon.tl.types import (
 
 from .. import loader, utils
 
-logger = logging.getLogger(__name__)
+__version__ = (1, 0, 0)
 
 BANNED_RIGHTS = {
     "view_messages": False,

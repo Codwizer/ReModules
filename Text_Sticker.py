@@ -23,6 +23,8 @@ from PIL import ImageFont
 
 from .. import loader, utils
 
+__version__ = (1, 0, 0)
+
 
 @loader.tds
 class TextinstickerMod(loader.Module):

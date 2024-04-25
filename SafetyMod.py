@@ -16,6 +16,8 @@ from telethon.tl.types import Message
 
 from .. import loader, utils
 
+__version__ = (1, 0, 0)
+
 
 def generate_password(length, letters=True, numbers=True, symbols=True):
     """Function to generate random password"""

@@ -20,11 +20,12 @@ from hikkatl.types import Message
 
 from .. import loader, utils
 
+__version__ = (1, 0, 0)
+
 
 @loader.tds
 class ArticleMod(loader.Module):
     """Displays your article Criminal Code of the Russian Federation"""
-
 
     strings = {
         "name": "Article",

@@ -12,13 +12,14 @@
 # scope: Жаконизатор 0.0.1
 # ---------------------------------------------------------------------------------
 
-import io, re, os, requests
+import io, requests
 from textwrap import wrap
 
 from PIL import Image, ImageDraw, ImageFont
-from telethon import events
 
 from .. import loader, utils
+
+__version__ = (1, 0, 0)
 
 
 @loader.tds

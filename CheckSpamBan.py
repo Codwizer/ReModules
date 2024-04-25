@@ -16,6 +16,8 @@ from .. import loader, utils
 from ..utils import answer
 from telethon.tl.types import Message
 
+__version__ = (1, 0, 0)
+
 
 @loader.tds
 class SpamBanCheckMod(loader.Module):

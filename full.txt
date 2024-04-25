@@ -20,4 +20,6 @@ face
 numbersapi
 hikkahost
 globalrestrict
-geminiai
+Text2File
+Kittens
+FakeWallet

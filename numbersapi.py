@@ -17,6 +17,8 @@ from .. import loader, utils
 import requests
 from datetime import datetime
 
+__version__ = (1, 0, 0)
+
 
 def get_fact_about_number(number, fact_type):
     url = f"http://numbersapi.com/{number}/{fact_type}"

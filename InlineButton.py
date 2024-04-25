@@ -16,6 +16,8 @@ from ..inline.types import InlineQuery
 from ..utils import rand
 from .. import loader, utils
 
+__version__ = (1, 0, 0)
+
 
 @loader.tds
 class InlineButtonMod(loader.Module):
@@ -23,6 +25,11 @@ class InlineButtonMod(loader.Module):
 
     strings = {
         "name": "InlineButton",
+        "titles": "Create a message with the Inline Button"
+    }
+
+    strings_ru = {
+        "titles": "Создай сообщение с Inline Кнопкой"
     }
 
     async def crinl_inline_handler(self, query: InlineQuery):
@@ -37,7 +44,7 @@ class InlineButtonMod(loader.Module):
                 url = args_list[2].strip()
 
             return {
-                "title": "Создай сообщение с Inline Кнопкой",
+                "title": self.strings("titles"),
                 "description": f"{message}, {name}, {url}",
                 "message": message,
                 "reply_markup": [{"text": name, "url": url}],

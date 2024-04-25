@@ -20,6 +20,7 @@ from anilibria import AniLibriaClient
 import datetime
 
 ani_client = AniLibriaClient()
+__version__ = (1, 0, 0)
 
 
 @loader.tds

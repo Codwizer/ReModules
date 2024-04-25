@@ -17,8 +17,6 @@ import asyncio
 from urllib.parse import quote_plus
 from datetime import datetime
 from bs4 import BeautifulSoup
-import logging
-
 import aiohttp
 import random
 import urllib.request
@@ -26,6 +24,8 @@ import json
 from telethon.tl.types import Message
 
 from .. import loader, utils
+
+__version__ = (1, 0, 0)
 
 
 async def get_random_image():

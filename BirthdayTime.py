@@ -20,6 +20,8 @@ from datetime import timedelta
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.functions.account import UpdateProfileRequest
 
+__version__ = (1, 0, 0)
+
 d_msg = [
     "Ждешь его?",
     "Осталось немного)",
