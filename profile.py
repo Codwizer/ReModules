@@ -37,7 +37,7 @@ class ProfileEditorMod(loader.Module):
         "error_occupied": "The new username is already occupied!",
     }
 
-    strings = {
+    strings_ru = {
         "error_format": "Неправильный формат аргумента. Попробуйте еще раз.",
         "done_name": "Новое имя успешно настроено!",
         "done_bio": "Новое био успешно настроена!",
