@@ -11,7 +11,7 @@
 # -----------------------------------------------------------------------------------
 # meta developer: @nervousmods, @hikka_mods
 # scope: hikka_only
-# scope: hikka_min 1.4.2
+# scope: hikka_min 1.5.0
 # -----------------------------------------------------------------------------------
 
 __version__ = (1, 0, 1)
@@ -40,7 +40,7 @@ class ProfileEditorMod(loader.Module):
     strings_ru = {
         "error_format": "Неправильный формат аргумента. Попробуйте еще раз.",
         "done_name": "Новое имя успешно настроено!",
-        "done_bio": "Новое био успешно настроена!",
+        "done_bio": "Новое био успешно настроено!",
         "done_username": "Новое имя пользователя успешно установлено!",
         "error_occupied": "Новое имя пользователя уже занято!",
     }
@@ -50,7 +50,7 @@ class ProfileEditorMod(loader.Module):
         args = utils.get_args_raw(message).split("/")
 
         if len(args) == 0:
-            return await utils.answer(self.strings("error_format"))
+            return await utils.answer(message, self.strings("error_format"))
         if len(args) == 1:
             firstname = args[0]
             lastname = " "
@@ -60,23 +60,23 @@ class ProfileEditorMod(loader.Module):
         await message.client(
             UpdateProfileRequest(first_name=firstname, last_name=lastname)
         )
-        await utils.answer(self.strings("done_name"))
+        await utils.answer(message, self.strings("done_name"))
 
     async def aboutcmd(self, message):
         """- for change your bio."""
         args = utils.get_args_raw(message)
         if not args:
-            return await utils.answer(self.strings("error_format"))
+            return await utils.answer(message, self.strings("error_format"))
         await message.client(UpdateProfileRequest(about=args))
-        await utils.answer(self.strings("done_bio"))
+        await utils.answer(message, self.strings("done_bio"))
 
     async def usercmd(self, message):
         """- for change your username. Enter value without "@"."""
         args = utils.get_args_raw(message)
         if not args:
-            return await utils.answer(self.strings("error_format"))
+            return await utils.answer(message, self.strings("error_format"))
         try:
             await message.client(UpdateUsernameRequest(args))
-            await utils.answer(self.strings("done_username"))
+            await utils.answer(message, self.strings("done_username"))
         except UsernameOccupiedError:
-            await utils.answer(self.strings("error_occupied"))
+            await utils.answer(message, self.strings("error_occupied"))
