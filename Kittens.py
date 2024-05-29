@@ -43,7 +43,7 @@ class Kittens(loader.Module):
         """-> to get a cute kitty"""
         await message.edit(self.strings("search"))
         time.sleep(1)
-        chat = "catslovemeow"
+        chat = "mods_kitten"
         result = await message.client(
             functions.messages.GetHistoryRequest(
                 peer=chat,
